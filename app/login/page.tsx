@@ -6,6 +6,7 @@ import { Cloud } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from '@supabase/auth-helpers-react'
 import { useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Login() {
   const supabaseClient = useSupabaseClient()
@@ -26,13 +27,15 @@ export default function Login() {
     <div className="flex items-center justify-center min-h-screen bg-gray-900">
       <div className="w-full max-w-md p-8 space-y-8 bg-gray-800/50 backdrop-blur-md rounded-2xl shadow-lg">
         <div className="text-center">
-            <div className="flex justify-center items-center gap-3 mb-4">
-              <div className="p-3 bg-gray-700/50 rounded-2xl">
-                <Cloud className="h-8 w-8 text-blue-400" />
-              </div>
-              <h1 className="text-3xl font-light text-white">
-                  Hava<span className="font-semibold">Pro</span>
-              </h1>
+            <div className="flex justify-center items-center mb-6">
+              <Image 
+                src="/logo.png" 
+                alt="HavaPro Logo" 
+                width={700} 
+                height={280} 
+                className="h-48 sm:h-56 w-auto"
+                priority
+              />
             </div>
             <p className="text-gray-400">Sign in to access your weather dashboard</p>
         </div>

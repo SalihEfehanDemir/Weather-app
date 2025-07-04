@@ -50,10 +50,23 @@ export function LocationsPage() {
       fetchLocations()
     } else {
       setResults([])
+      setError(null) // Clear error when search term is cleared
     }
   }, [debouncedSearchTerm])
 
   const handleAddLocation = async (location: SearchResult) => {
+    // Check if location already exists
+    const existingLocation = locations.find(loc => 
+      Math.abs(loc.lat - location.lat) < 0.01 && 
+      Math.abs(loc.lon - location.lon) < 0.01
+    );
+    
+    if (existingLocation) {
+      setError(`${location.name} is already in your locations list.`);
+      return;
+    }
+    
+    setError(null);
     await addLocation({
         name: location.name,
         lat: location.lat,
@@ -93,7 +106,10 @@ export function LocationsPage() {
             <Input
               placeholder="E.g., London, New York..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value)
+                if (error) setError(null) // Clear error when typing
+              }}
               className="pl-10"
             />
             {loading && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 animate-spin" />}
@@ -101,14 +117,27 @@ export function LocationsPage() {
           {error && <p className="text-red-500 mt-2">{error}</p>}
           {results.length > 0 && (
             <div className="mt-4 space-y-2 max-h-60 overflow-y-auto">
-              {results.map((result, index) => (
-                <div key={index} className="flex items-center justify-between p-2 rounded-md hover:bg-white/10">
-                  <span>{result.name}, {result.state ? `${result.state}, ` : ''}{result.country}</span>
-                  <Button size="sm" onClick={() => handleAddLocation(result)}>
-                    Add
-                  </Button>
-                </div>
-              ))}
+              {results.map((result, index) => {
+                const isAlreadyAdded = locations.some(loc => 
+                  Math.abs(loc.lat - result.lat) < 0.01 && 
+                  Math.abs(loc.lon - result.lon) < 0.01
+                );
+                
+                return (
+                  <div key={index} className="flex items-center justify-between p-2 rounded-md hover:bg-white/10">
+                    <span>{result.name}, {result.state ? `${result.state}, ` : ''}{result.country}</span>
+                    {isAlreadyAdded ? (
+                      <Badge variant="outline" className="text-green-400 border-green-400">
+                        Already added
+                      </Badge>
+                    ) : (
+                      <Button size="sm" onClick={() => handleAddLocation(result)}>
+                        Add
+                      </Button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
         </CardContent>

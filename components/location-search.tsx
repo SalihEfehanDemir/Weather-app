@@ -17,7 +17,7 @@ interface SearchResult {
 }
 
 export function LocationSearch() {
-  const { addLocation, setMainLocation } = useProfile();
+  const { addLocation, setMainLocation, locations } = useProfile();
   const [open, setOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500)
@@ -52,18 +52,29 @@ export function LocationSearch() {
   const handleSelectLocation = async (location: SearchResult) => {
     setLoading(true)
     try {
-      // Add the location and get the new location object with its ID
-      const newLocation = await addLocation({
-        name: location.name,
-        country: location.country,
-        lat: location.lat,
-        lon: location.lon,
-        is_main: false, 
-      });
+      // Check if location already exists
+      const existingLocation = locations.find(loc => 
+        Math.abs(loc.lat - location.lat) < 0.01 && 
+        Math.abs(loc.lon - location.lon) < 0.01
+      );
+      
+      if (existingLocation) {
+        // Location already exists, just set it as main
+        await setMainLocation(existingLocation);
+      } else {
+        // Location doesn't exist, add it first then set as main
+        const newLocation = await addLocation({
+          name: location.name,
+          country: location.country,
+          lat: location.lat,
+          lon: location.lon,
+          is_main: false, 
+        });
 
-      if (newLocation && newLocation.id) {
-        // Set this new location as the main one
-        await setMainLocation(newLocation);
+        if (newLocation && newLocation.id) {
+          // Set this new location as the main one
+          await setMainLocation(newLocation);
+        }
       }
       
       // Reset and close

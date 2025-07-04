@@ -100,22 +100,22 @@ export function WeatherDashboard() {
     <div className="min-h-screen p-3 sm:p-4 lg:p-6">
       <div className="max-w-8xl mx-auto">
         {/* Enhanced Header */}
-        <header className="glass-strong rounded-2xl sm:rounded-3xl p-4 sm:p-6 mb-4 sm:mb-6 animate-fade-in">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <header className="glass-strong rounded-2xl sm:rounded-3xl p-3 sm:p-4 mb-3 sm:mb-4 animate-fade-in">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <Image 
                   src="/logo.png" 
                   alt="HavaPro Logo" 
-                  width={120} 
-                  height={40} 
-                  className="h-8 sm:h-10 w-auto"
+                  width={350} 
+                  height={120} 
+                  className="h-16 sm:h-20 w-auto"
                   priority
                 />
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <div className="flex-1 sm:flex-initial">
                 <LocationSearch />
               </div>
