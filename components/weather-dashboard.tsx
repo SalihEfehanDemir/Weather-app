@@ -10,6 +10,7 @@ import { UserProfile } from "@/components/user-profile"
 import { LocationsPage } from "@/components/locations-page"
 import { ProfilePage } from "@/components/profile-page"
 import { useProfile } from "@/context/ProfileContext"
+import Image from "next/image"
 
 const ISTANBUL_COORDS = { lat: 41.015137, lon: 28.979530 };
 
@@ -102,14 +103,15 @@ export function WeatherDashboard() {
         <header className="glass-strong rounded-2xl sm:rounded-3xl p-4 sm:p-6 mb-4 sm:mb-6 animate-fade-in">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="p-2 sm:p-3 glass-subtle rounded-xl sm:rounded-2xl">
-                <Cloud className="h-5 w-5 sm:h-6 sm:w-6 text-blue-400" />
-              </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-light text-white">
-                  Hava<span className="font-semibold">Pro</span>
-                </h1>
-                <p className="text-xs sm:text-sm text-gray-400">Advanced Weather Intelligence</p>
+              <div className="relative">
+                <Image 
+                  src="/logo.png" 
+                  alt="HavaPro Logo" 
+                  width={120} 
+                  height={40} 
+                  className="h-8 sm:h-10 w-auto"
+                  priority
+                />
               </div>
             </div>
 
