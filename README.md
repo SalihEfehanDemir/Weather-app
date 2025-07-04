@@ -306,6 +306,6 @@ If you encounter any issues or have questions:
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made by [SalihEfehanDemir]**
 
 *WeatherPro - Your Advanced Weather Intelligence Platform*
