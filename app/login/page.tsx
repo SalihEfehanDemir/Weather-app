@@ -1,26 +1,14 @@
 'use client'
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
-import { Cloud } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useSession } from '@supabase/auth-helpers-react'
 import { useEffect } from 'react'
 import Image from 'next/image'
+import { Button } from "@/components/ui/button"
 
 export default function Login() {
-  const supabaseClient = useSupabaseClient()
-  const session = useSession()
   const router = useRouter()
 
-  useEffect(() => {
-    if (session) {
-      router.replace('/')
-    }
-  }, [session, router])
-
-  if (session) {
-    return null;
+  const handleDemoLogin = () => {
+    router.replace('/')
   }
 
   return (
@@ -37,23 +25,19 @@ export default function Login() {
                 priority
               />
             </div>
-            <p className="text-gray-400">Sign in to access your weather dashboard</p>
+            <p className="text-gray-400">Welcome to HavaPro Weather Dashboard</p>
         </div>
-        <Auth
-          supabaseClient={supabaseClient}
-          appearance={{ theme: ThemeSupa,
-            style: {
-                button: { background: '#3b82f6', borderColor: '#3b82f6', color: 'white' },
-                anchor: { color: '#60a5fa' },
-                input: { background: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.1)', color: 'white' },
-                label: { color: '#9ca3af' },
-                message: { color: '#ef4444' },
-            },
-          }}
-          providers={['github', 'google']}
-          theme="dark"
-          socialLayout="horizontal"
-        />
+        <div className="space-y-4 mt-8">
+          <p className="text-center text-gray-400">
+            Temporarily in demo mode for deployment
+          </p>
+          <Button 
+            className="w-full py-6 bg-blue-500 hover:bg-blue-600"
+            onClick={handleDemoLogin}
+          >
+            Continue to Demo
+          </Button>
+        </div>
       </div>
     </div>
   )
