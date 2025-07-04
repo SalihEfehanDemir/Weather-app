@@ -2,7 +2,7 @@
 
 Modern, responsive weather dashboard built with Next.js 14, featuring glass-morphism design, real-time weather data, and advanced analytics.
 
-![WeatherPro Dashboard](https://via.placeholder.com/800x400/0f172a/ffffff?text=WeatherPro+Dashboard)
+
 
 ## ✨ Features
 
@@ -306,6 +306,6 @@ If you encounter any issues or have questions:
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made by [SalihEfehanDemir]**
 
 *WeatherPro - Your Advanced Weather Intelligence Platform*
