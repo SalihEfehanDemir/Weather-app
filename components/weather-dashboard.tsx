@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Cloud, Home, MapPin, Loader2 } from "lucide-react"
+import { Cloud, Home, MapPin, Loader2, User } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CurrentWeatherCard } from "@/components/current-weather-card"
 import { WeatherForecast } from "@/components/weather-forecast"
@@ -127,7 +127,7 @@ export function WeatherDashboard() {
         {/* Enhanced Navigation */}
         <nav className="glass-strong rounded-2xl sm:rounded-3xl p-2 mb-4 sm:mb-6 animate-fade-in">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-transparent gap-1 sm:gap-2 p-1">
+            <TabsList className="grid w-full grid-cols-3 bg-transparent gap-1 sm:gap-2 p-1">
               <TabsTrigger
                 value="dashboard"
                 className="glass-subtle data-[state=active]:glass-strong rounded-xl sm:rounded-2xl text-xs sm:text-sm py-2 sm:py-3"
@@ -141,6 +141,13 @@ export function WeatherDashboard() {
               >
                 <MapPin className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Locations</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="profile"
+                className="glass-subtle data-[state=active]:glass-strong rounded-xl sm:rounded-2xl text-xs sm:text-sm py-2 sm:py-3"
+              >
+                <User className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Profile</span>
               </TabsTrigger>
             </TabsList>
 
